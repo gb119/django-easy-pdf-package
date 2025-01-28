@@ -1,0 +1,43 @@
+{% set name = "django-easy-pdf3" %}
+{% set version = "0.1.4" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/django-easy-pdf3-{{ version }}.tar.gz
+  sha256: 5c406cf07abc986cedde94552a332c24b14e72693e7d1d0db5b392012aac9919
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python
+    - pip
+  run:
+    - python
+    - django >=2.0
+    - xhtml2pdf >=0.2b1
+    - reportlab >=3
+
+test:
+  imports:
+    - easy_pdf
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/olksndrdevhub/django-easy-pdf3
+  summary: Django PDF views, the easy way
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - https://github.com/gb119
